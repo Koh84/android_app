@@ -20,10 +20,6 @@ public class MainActivity extends AppCompatActivity {
     class MyButtonListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-
-            HardControl hardControl = new HardControl();
-
-
             ledon = !ledon;
             if(ledon) {
                 button.setText("ALL OFF");
@@ -31,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
                 checkBoxLed2.setChecked(true);
                 checkBoxLed3.setChecked(true);
                 checkBoxLed4.setChecked(true);
+
+                for(int i = 0; i<4; i++)
+                    HardControl.ledCtrl(i,1);
             }
             else{
                 button.setText("ALL ON");
@@ -38,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
                 checkBoxLed2.setChecked(false);
                 checkBoxLed3.setChecked(false);
                 checkBoxLed4.setChecked(false);
+
+                for(int i = 0; i<4; i++)
+                    HardControl.ledCtrl(i,0);
             }
         }
     }
@@ -52,40 +54,48 @@ public class MainActivity extends AppCompatActivity {
                 if (checked) {
                     // Put some meat on the sandwich
                     Toast.makeText(getApplicationContext(), "LED1 on", Toast.LENGTH_SHORT).show();
+                    HardControl.ledCtrl(0,1);
                 }
                 else {
                     // Remove the meat
                     Toast.makeText(getApplicationContext(), "LED1 off", Toast.LENGTH_SHORT).show();
+                    HardControl.ledCtrl(0,0);
                 }
                 break;
             case R.id.LED2:
                 if (checked) {
                     // Put some meat on the sandwich
                     Toast.makeText(getApplicationContext(), "LED2 on", Toast.LENGTH_SHORT).show();
+                    HardControl.ledCtrl(1,1);
                 }
                 else {
                     // Remove the meat
                     Toast.makeText(getApplicationContext(), "LED2 off", Toast.LENGTH_SHORT).show();
+                    HardControl.ledCtrl(1,0);
                 }
                 break;
             case R.id.LED3:
                 if (checked) {
                     // Put some meat on the sandwich
                     Toast.makeText(getApplicationContext(), "LED3 on", Toast.LENGTH_SHORT).show();
+                    HardControl.ledCtrl(2,1);
                 }
                 else {
                     // Remove the meat
                     Toast.makeText(getApplicationContext(), "LED3 off", Toast.LENGTH_SHORT).show();
+                    HardControl.ledCtrl(2,0);
                 }
                 break;
             case R.id.LED4:
                 if (checked) {
                     // Put some meat on the sandwich
                     Toast.makeText(getApplicationContext(), "LED4 on", Toast.LENGTH_SHORT).show();
+                    HardControl.ledCtrl(3,1);
                 }
                 else {
                     // Remove the meat
                     Toast.makeText(getApplicationContext(), "LED4 off", Toast.LENGTH_SHORT).show();
+                    HardControl.ledCtrl(3,0);
                 }
                 break;
         }
@@ -95,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        HardControl.ledOpen();
 
         button = (Button) findViewById(R.id.BUTTON);
         button.setOnClickListener(new MyButtonListener());
